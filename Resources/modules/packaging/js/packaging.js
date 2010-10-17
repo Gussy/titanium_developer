@@ -1295,6 +1295,7 @@ PackageProject.setupMobileView = function()
 			
 			$(this).addClass('disabled');
 			$('#iphone_kill_button').removeClass('disabled');
+			$('#iphone_re-launch_button').removeClass('disabled');
 			
 			// clear viewer
 			$('#mobile_iphone_emulator_viewer').empty();
@@ -1332,8 +1333,19 @@ PackageProject.setupMobileView = function()
 			
 		});
 		
+		// 
+		// Re-Launch emulator (shortcut to clicking kill then launch)
+		//
+		$('#iphone_re-launch_button').click(function()
+		{			
+			// Force launch to trigger
+			$('#iphone_launch_button').removeClass('disabled');
+			$('#iphone_launch_button').trigger('click');
+		});
+		
 		// create emulator buttons
 		TiUI.GreyButton({id:'iphone_launch_button'});
+		TiUI.GreyButton({id:'iphone_re-launch_button'});
 		TiUI.GreyButton({id:'iphone_kill_button'});
 
 		// show emulator tab and configure listeners
@@ -1354,7 +1366,7 @@ PackageProject.setupMobileView = function()
 				PackageProject.currentIPhonePID = null;
 				$(this).addClass('disabled');
 				$('#iphone_launch_button').removeClass('disabled');
-				
+				$('#iphone_re-launch_button').addClass('disabled');
 			}
 		});
 		
